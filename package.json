@@ -1,5 +1,5 @@
 {
-  "name": "@wemakefuture/n8n-nodes-onesaas",
+  "name": "n8n-nodes-onesaas",
   "version": "1.0.0",
   "description": "1SaaS brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.",
   "keywords": [
@@ -12,7 +12,7 @@
     "email": "pschueler@wemakefuture.com"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com"
   },
   "repository": "git://github.com/wemakefuture/n8n-nodes-onesaas.git",
   "main": "index.js",
