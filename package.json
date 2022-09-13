@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-onesaas",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "1SaaS brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.",
   "keywords": [
     "n8n-community-node-package"
@@ -8,11 +8,11 @@
   "license": "MIT",
   "homepage": "https://www.1saas.co/",
   "author": {
-    "name": "Pascal Schüler",
-    "email": "pschueler@wemakefuture.com"
+    "name": "wemakefuture",
+    "email": "dev@wemakefuture.com"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": "git://github.com/wemakefuture/n8n-nodes-onesaas.git",
   "main": "index.js",
@@ -47,8 +47,5 @@
     "prettier": "^2.7.1",
     "tslint": "^6.1.2",
     "typescript": "~4.6.0"
-  },
-  "dependencies": {
-    "sqlite3": "^5.0.11"
   }
 }
