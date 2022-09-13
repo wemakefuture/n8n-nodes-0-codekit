@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-base.oneSaas",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Utility"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://documenter.getpostman.com/view/18297710/UVkntwBv#authentication"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://documenter.getpostman.com/view/18297710/UVkntwBv"
+			}
+		]
+	}
+}

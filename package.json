@@ -1,19 +1,19 @@
 {
-  "name": "n8n-nodes-<...>",
-  "version": "0.1.0",
-  "description": "",
+  "name": "n8n-nodes-onesaas",
+  "version": "1.0.0",
+  "description": "1SaaS brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://www.1saas.co/",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Pascal Schüler",
+    "email": "pschueler@wemakefuture.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/Pascal-Sch/n8n-nodes-onesaas.git"
   },
   "main": "index.js",
   "scripts": {
@@ -30,12 +30,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/OneSaasApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/OneSaas/OneSaas.node.js"
     ]
   },
   "devDependencies": {
@@ -49,5 +47,8 @@
     "prettier": "^2.7.1",
     "tslint": "^6.1.2",
     "typescript": "~4.6.0"
+  },
+  "dependencies": {
+    "sqlite3": "^5.0.11"
   }
 }
