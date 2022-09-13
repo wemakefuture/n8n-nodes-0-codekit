@@ -1,5 +1,5 @@
 {
-  "name": "n8n-nodes-onesaas",
+  "name": "@wemakefuture/n8n-nodes-onesaas",
   "version": "1.0.0",
   "description": "1SaaS brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.",
   "keywords": [
@@ -11,10 +11,10 @@
     "name": "Pascal Schüler",
     "email": "pschueler@wemakefuture.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wemakefuture/n8n-nodes-onesaas.git"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
+  "repository": "git://github.com/wemakefuture/n8n-nodes-onesaas.git",
   "main": "index.js",
   "scripts": {
     "build": "tsc && gulp build:icons",
