@@ -1,4 +1,4 @@
-# n8n-nodes-_node-name_
+# n8n-nodes-1saas
 
 This is an n8n community node. It lets you use 1SaaS in your n8n workflows.
 
