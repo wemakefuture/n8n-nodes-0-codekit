@@ -1,8 +1,8 @@
-# n8n-nodes-1saas
+# n8n-nodes-0-CodeKit
 
 This is an n8n community node. It lets you use 1SaaS in your n8n workflows.
 
-1SaaS brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.
+0-CodeKit (formerly 1SaaS) brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
@@ -37,7 +37,7 @@ _State the minimum n8n version, as well as which versions you test against. You 
 
 * [n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/)
 * [1SaaS Api Documentation](https://documenter.getpostman.com/view/18297710/UVkntwBv)
-* [1SaaS Sign Up](https://www.1saas.co/)
+* [1SaaS Sign Up](https://my.1saas.co/)
 
 ## Version history
 
