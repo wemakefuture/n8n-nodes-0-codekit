@@ -4,7 +4,7 @@ import { IExecuteFunctions } from 'n8n-core';
 
 import { IDataObject, NodeApiError, NodeOperationError } from 'n8n-workflow';
 
-export async function oneSaasRequest(
+export async function codeKitRequest(
 	this: IExecuteFunctions,
 	method: string,
 	resource: string,
@@ -13,7 +13,7 @@ export async function oneSaasRequest(
 	uri?: string,
 	option: IDataObject = {},
 ) {
-	const credentials = await this.getCredentials('oneSaasApi');
+	const credentials = await this.getCredentials('codeKitApi');
 	if (credentials === undefined) {
 		throw new NodeOperationError(this.getNode(), 'No credentials got returned!');
 	}

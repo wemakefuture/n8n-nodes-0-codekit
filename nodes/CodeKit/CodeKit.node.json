@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-base.oneSaas",
+	"node": "n8n-nodes-base.codeKit",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Utility"],

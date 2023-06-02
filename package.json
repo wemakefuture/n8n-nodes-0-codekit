@@ -1,7 +1,7 @@
 {
-  "name": "n8n-nodes-onesaas",
-  "version": "0.0.2",
-  "description": "1SaaS brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.",
+  "name": "n8n-nodes-0-codekit",
+  "version": "0.0.3",
+  "description": "0-CodeKit brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.",
   "keywords": [
     "n8n-community-node-package"
   ],
@@ -14,7 +14,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "repository": "git://github.com/wemakefuture/n8n-nodes-onesaas.git",
+  "repository": "https://github.com/wemakefuture/n8n-nodes-0-codekit.git",
   "main": "index.js",
   "scripts": {
     "build": "tsc && gulp build:icons",
@@ -30,10 +30,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/OneSaasApi.credentials.js"
+      "dist/credentials/CodeKitApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/OneSaas/OneSaas.node.js"
+      "dist/nodes/CodeKit/CodeKit.node.js"
     ]
   },
   "devDependencies": {

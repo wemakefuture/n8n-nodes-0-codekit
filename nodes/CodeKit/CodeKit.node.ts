@@ -25,7 +25,7 @@ import {
 	storageOperations,
 } from './descriptions';
 
-import { oneSaasRequest } from './GenericFunctions';
+import { codeKitRequest } from './GenericFunctions';
 
 type MergeFiles = {
 	files: {
@@ -37,23 +37,23 @@ type MergeFiles = {
 	};
 };
 
-export class OneSaas implements INodeType {
+export class CodeKit implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: '1SaaS.co',
-		name: 'oneSaas',
-		icon: 'file:1SaaS.co.svg',
+		displayName: '0-CodeKit',
+		name: 'codeKit',
+		icon: 'file:codekit.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
 		description: 'A toolbox of no-code utilities',
 		defaults: {
-			name: '1SaaS.co',
+			name: '0-CodeKit',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
 		credentials: [
 			{
-				name: 'oneSaasApi',
+				name: 'codeKitApi',
 				required: true,
 			},
 		],
@@ -480,7 +480,7 @@ export class OneSaas implements INodeType {
 				}
 
 				// No Code Helper
-				responseData = await oneSaasRequest.call(this, 'POST', `${resource}/${operation}`, body);
+				responseData = await codeKitRequest.call(this, 'POST', `${resource}/${operation}`, body);
 
 				if (Array.isArray(responseData)) {
 					returnData.push.apply(returnData, responseData as IDataObject[]);
