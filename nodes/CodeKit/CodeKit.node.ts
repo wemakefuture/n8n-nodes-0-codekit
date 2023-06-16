@@ -39,7 +39,7 @@ type MergeFiles = {
 
 export class CodeKit implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: '0-CodeKit',
+		displayName: '0CodeKit',
 		name: 'codeKit',
 		icon: 'file:codekit.svg',
 		group: ['transform'],
@@ -47,7 +47,7 @@ export class CodeKit implements INodeType {
 		subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
 		description: 'A toolbox of no-code utilities',
 		defaults: {
-			name: '0-CodeKit',
+			name: '0CodeKit',
 		},
 		inputs: ['main'],
 		outputs: ['main'],

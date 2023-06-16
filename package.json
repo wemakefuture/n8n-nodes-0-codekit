@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-onesaas",
-  "version": "0.0.3",
-  "description": "0-CodeKit brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.",
+  "version": "0.0.4",
+  "description": "0CodeKit brings you the tool platform for all your projects when working with low-code, no-code, APIs and automation.",
   "keywords": [
     "n8n-community-node-package"
   ],

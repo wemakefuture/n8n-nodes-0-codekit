@@ -2,7 +2,7 @@ import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
 export class CodeKitApi implements ICredentialType {
 	name = 'codeKitApi';
-	displayName = '0-CodeKit API';
+	displayName = '0CodeKit API';
 	documentationUrl = 'https://documenter.getpostman.com/view/18297710/UVkntwBv';
 	properties: INodeProperties[] = [
 		{
