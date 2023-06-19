@@ -1,4 +1,4 @@
-# n8n-nodes-onesaas
+# n8n-nodes-onesaas-0codekit
 
 This is an n8n community node. It lets you use 0CodeKit in your n8n workflows.
 
@@ -41,6 +41,6 @@ _State the minimum n8n version, as well as which versions you test against. You 
 
 ## Version history
 
-The community node version 4.0 is based on 0CodeKit version 2.0.
+The community node version 1.0 is based on 0CodeKit (formerly 1SaaS) version 2.0.
 
 
