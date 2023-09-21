@@ -356,6 +356,11 @@ export class CodeKit implements INodeType {
 								body.intervalOptions = this.getNodeParameter('posthook', i) as string;
 							}
 						}
+						if (operation === 'thumbnail') {
+							body.url = this.getNodeParameter('url', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
 						if (operation === 'utm') {
 							const utmop = this.getNodeParameter('utmop', i) as string;
 							operation = `${operation}/${utmop}`;

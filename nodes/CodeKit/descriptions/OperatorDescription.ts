@@ -44,6 +44,12 @@ export const operatorOperations: INodeProperties[] = [
 				action: 'Split name',
 			},
 			{
+				name: 'Thumbnail',
+				value: 'thumbnail',
+				description: 'Extract thumbnail from Video URL',
+				action: 'Extract thumbnail from video url',
+			},
+			{
 				name: 'UTM',
 				value: 'utm',
 				description: 'Build URL with utm parameters or parse URLs utm parameters from URL',
@@ -390,5 +396,48 @@ export const operatorFields = [
 				utmop: ['build'],
 			},
 		},
+	},
+	// operator: thumbnail
+	{
+		displayName: 'Video URL',
+		name: 'url',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['thumbnail'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'URL of the Video',
+	},
+	{
+		displayName: 'Get File as URL',
+		name: 'getAsUrl',
+		type: 'boolean',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['thumbnail'],
+				resource: ['operator'],
+			},
+		},
+		default: false,
+		description: 'Whether you want the thumbnail as an URL',
+	},
+	{
+		displayName: 'File Name',
+		name: 'fileName',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['thumbnail'],
+				resource: ['operator'],
+			},
+		},
+		default: 'my-thumbnail',
+		description: 'Important: If you want to keep the filetype. Add the extension to the filename.',
 	},
 ] as INodeProperties[];
