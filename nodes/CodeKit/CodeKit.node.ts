@@ -173,6 +173,11 @@ export class CodeKit implements INodeType {
 							body.text = this.getNodeParameter('text', i) as string;
 							body.resultLang = this.getNodeParameter('resultLang', i) as string;
 						}
+
+						if (operation === 'pdfocr') {
+							body.pdfUrl = this.getNodeParameter('pdfUrl', i) as string;
+						}
+
 						break;
 					// Code : https://docs.1saas.co/api-documentation/code
 					case 'business':
@@ -275,6 +280,7 @@ export class CodeKit implements INodeType {
 								this.getNodeParameter('rangeEnd', i) as number,
 							];
 						}
+
 						if (operation === 'string') {
 							body.length = this.getNodeParameter('length', i) as number;
 							body.type = this.getNodeParameter('type', i) as number;

@@ -31,6 +31,12 @@ export const aiOperations: INodeProperties[] = [
 				action: 'Mood detection',
 			},
 			{
+				name: 'PDF OCR',
+				value: 'pdfocr',
+				description: 'Extract text from PDF with AI',
+				action: 'Extracts text from PDF with AI',
+			},
+			{
 				name: 'Picture Object Recognition',
 				value: 'pictureObjectRecognition',
 				description: 'Detects content and objects on a picture',
@@ -114,6 +120,21 @@ export const aiFields: INodeProperties[] = [
 		},
 		default: '',
 		description: 'URL of the image you want to analyse',
+	},
+	// ai: pdfocr
+	{
+		displayName: 'PDF URL',
+		name: 'pdfUrl',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['pdfocr'],
+				resource: ['ai'],
+			},
+		},
+		default: '',
+		description: 'PDF to extract text with AI',
 	},
 	// ai: translate
 	{
