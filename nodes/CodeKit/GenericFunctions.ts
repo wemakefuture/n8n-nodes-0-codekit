@@ -28,7 +28,7 @@ export async function codeKitRequest(
 	};
 	options = Object.assign({}, options, option);
 	options.headers!['auth'] = `${credentials.apiKey}`;
-console.log(options);
+
 
 	try {
 		const responseData = await this.helpers.request(options);
