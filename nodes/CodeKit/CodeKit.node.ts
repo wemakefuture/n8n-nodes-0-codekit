@@ -25,7 +25,7 @@ import {
 	storageOperations,
 } from './descriptions';
 
-import { codeKitRequest } from './GenericFunctions';
+import { codeKitRequest, mapArrayOfObjectsToStringArray } from './GenericFunctions';
 
 type MergeFiles = {
 	files: {
@@ -225,6 +225,16 @@ export class CodeKit implements INodeType {
 						break;
 					case 'code':
 						body.code = this.getNodeParameter('code', i) as string;
+						if(operation === 'async-python'){
+										 body.sendTo = this.getNodeParameter('sendTo', i) as string;
+
+							const requirementsUI = this.getNodeParameter('requirementsUI', i) as IDataObject;
+							const requirementsValues = requirementsUI.requirementsValues as IDataObject[];
+
+							body.requirements = mapArrayOfObjectsToStringArray(requirementsValues);
+
+						}
+
 						break;
 					case 'convert':
 						if (operation === 'iptogeo') {

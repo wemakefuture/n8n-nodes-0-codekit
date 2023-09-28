@@ -28,6 +28,7 @@ export async function codeKitRequest(
 	};
 	options = Object.assign({}, options, option);
 	options.headers!['auth'] = `${credentials.apiKey}`;
+console.log(options);
 
 	try {
 		const responseData = await this.helpers.request(options);
@@ -35,4 +36,17 @@ export async function codeKitRequest(
 	} catch (error) {
 		throw new NodeApiError(this.getNode(), error);
 	}
+}
+
+export function mapArrayOfObjectsToStringArray(objectsArr : IDataObject[]){
+			if(!objectsArr){
+					return [];
+		 }
+				const resultArr : string[] = [];
+
+			 objectsArr.forEach(el => {
+				resultArr.push(el.name as string);
+			 });
+
+			 return resultArr;
 }
