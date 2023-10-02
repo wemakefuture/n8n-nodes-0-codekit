@@ -173,9 +173,35 @@ export class CodeKit implements INodeType {
 							body.text = this.getNodeParameter('text', i) as string;
 							body.resultLang = this.getNodeParameter('resultLang', i) as string;
 						}
-
+						if (operation === 'transcribe') {
+							body.url = this.getNodeParameter('url', i) as string;
+						}
 						if (operation === 'pdfocr') {
 							body.pdfUrl = this.getNodeParameter('pdfUrl', i) as string;
+						}
+						if (operation === 'detectEmailType') {
+							body.subject = this.getNodeParameter('subject', i) as string;
+							body.body = this.getNodeParameter('body', i) as string;
+						}
+						if (
+							operation === 'detectFace' ||
+							operation === 'detectBrand' ||
+							operation === 'detectColor' ||
+							operation === 'detectAdultContent'
+						) {
+							body.imageUrl = this.getNodeParameter('imageUrl', i) as string;
+						}
+						if (operation === 'generateImage') {
+							body.prompt = this.getNodeParameter('prompt', i) as string;
+							body.n = this.getNodeParameter('n', i) as number;
+							body.size = this.getNodeParameter('size', i) as string;
+						}
+						if (
+							operation === 'tooLongToRead' ||
+							operation === 'extractContactInformation' ||
+							operation === 'checkContentPolicy'
+						) {
+							body.prompt = this.getNodeParameter('prompt', i) as string;
 						}
 
 						break;
@@ -225,14 +251,13 @@ export class CodeKit implements INodeType {
 						break;
 					case 'code':
 						body.code = this.getNodeParameter('code', i) as string;
-						if(operation === 'async-python'){
-										 body.sendTo = this.getNodeParameter('sendTo', i) as string;
+						if (operation === 'async-python') {
+							body.sendTo = this.getNodeParameter('sendTo', i) as string;
 
 							const requirementsUI = this.getNodeParameter('requirementsUI', i) as IDataObject;
 							const requirementsValues = requirementsUI.requirementsValues as IDataObject[];
 
 							body.requirements = mapArrayOfObjectsToStringArray(requirementsValues);
-
 						}
 
 						break;
