@@ -13,6 +13,12 @@ export const businessOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Check Free Email',
+				value: 'isFreeMail',
+				description: 'Checks if an email is a free email',
+				action: 'Check free email',
+			},
+			{
 				name: 'Lookup VAT Rates',
 				value: 'lookupvatrates',
 				description: 'Lookup VAT Rates of different countries',
@@ -38,6 +44,12 @@ export const businessOperations: INodeProperties[] = [
 				action: 'Verify BIC',
 			},
 			{
+				name: 'Verify Geo Location',
+				value: 'verifyGeoLocation',
+				description: 'Verifies a Geo Location',
+				action: 'Verify geo location',
+			},
+			{
 				name: 'Verify IBAN',
 				value: 'verifyIBAN',
 				description: 'Verifies a European banking-IBAN',
@@ -55,6 +67,33 @@ export const businessOperations: INodeProperties[] = [
 ];
 
 export const businessFields = [
+	{
+		displayName: 'Email',
+		name: 'email',
+		type: 'string',
+		placeholder: 'name@email.com',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['isFreemail'],
+				resource: ['business'],
+			},
+		},
+		default: '',
+	},
+	{
+		displayName: 'Address',
+		name: 'address',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['verifyGeoLocation'],
+				resource: ['business'],
+			},
+		},
+		default: '',
+	},
 	// business: lookupVat
 	{
 		displayName: 'Country Code',

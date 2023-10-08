@@ -15,16 +15,16 @@ export const convertOperations: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'IP to Geo',
-				value: 'iptogeo',
-				description: 'Gets the geolocation of an IP address',
-				action: 'Ip to geo converter',
+				name: 'Convert a CSV to Array',
+				value: 'csvtoarray',
+				description: 'Takes a CSV string and converts it to an array',
+				action: 'Convert a csv to array',
 			},
 			{
-				name: 'Nation ISO Switch',
-				value: 'nationiso',
-				description: 'Get the Nation by Country Code ISO or reverse',
-				action: 'Nation ISO switch',
+				name: 'Convert a CSV to JSON',
+				value: 'csvtojson',
+				description: 'Takes a CSV string and converts it to a valid JSON',
+				action: 'Convert a CSV to JSON',
 			},
 			{
 				name: 'Convert Currency',
@@ -33,10 +33,22 @@ export const convertOperations: INodeProperties[] = [
 				action: 'Convert currencys',
 			},
 			{
-				name: 'Convert a CSV to JSON',
-				value: 'csvtojson',
-				description: 'Takes a CSV string and converts it to a valid JSON',
-				action: 'Convert a CSV to JSON',
+				name: 'IP to Geo',
+				value: 'iptogeo',
+				description: 'Gets the geolocation of an IP address',
+				action: 'Ip to geo converter',
+			},
+			{
+				name: 'Message to JSON',
+				value: 'msgtojson',
+				description: 'Converts a message to a JSON object',
+				action: 'Message to JSON',
+			},
+			{
+				name: 'Nation ISO Switch',
+				value: 'nationiso',
+				description: 'Get the Nation by Country Code ISO or reverse',
+				action: 'Nation ISO switch',
 			},
 		],
 		default: 'iptogeo',
@@ -183,7 +195,7 @@ export const convertFields: INodeProperties[] = [
 		},
 		displayOptions: {
 			show: {
-				operation: ['csvtojson'],
+				operation: ['csvtojson', 'csvtoarray'],
 				resource: ['convert'],
 			},
 		},
@@ -235,5 +247,88 @@ export const convertFields: INodeProperties[] = [
 					'Whether to ignore the empty value in CSV columns. If a column value is not given, set this to true to skip them.',
 			},
 		],
+	},
+	{
+		displayName: 'Options',
+		name: 'options',
+		type: 'collection',
+		placeholder: 'Add Option',
+		displayOptions: {
+			show: {
+				operation: ['csvtoarray'],
+				resource: ['convert'],
+			},
+		},
+		default: {},
+		options: [
+			{
+				displayName: 'Delimiter',
+				name: 'delimiter',
+				type: 'string',
+				default: ';',
+				description:
+					'Delimiter used for seperating columns. Leave empty if delimiter is unknown in advance, in this case, delimiter will be auto-detected (by best attempt).',
+			},
+			{
+				displayName: 'Trim CSV',
+				name: 'omitFirstRow',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to omit the first row of the CSV file',
+			},
+		],
+	},
+	{
+		displayName: 'Type of Message',
+		name: 'urlbuffertype',
+		type: 'options',
+		options: [
+			{
+				name: 'URL',
+				value: 'url',
+			},
+			{
+				name: 'Buffer',
+				value: 'buffer',
+			},
+		],
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['msgtojson'],
+				resource: ['convert'],
+			},
+		},
+		default: 'url',
+	},
+	{
+		displayName: 'URL',
+		name: 'url',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['msgtojson'],
+				resource: ['convert'],
+				urlbuffertype: ['url'],
+			},
+		},
+		default: '',
+		description: 'URL of the message you want to convert',
+	},
+	{
+		displayName: 'Buffer',
+		name: 'buffer',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['msgtojson'],
+				resource: ['convert'],
+				urlbuffertype: ['buffer'],
+			},
+		},
+		default: '',
+		description: 'Buffer of the message you want to convert',
 	},
 ];

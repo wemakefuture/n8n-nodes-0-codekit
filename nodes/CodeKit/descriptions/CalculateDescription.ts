@@ -26,6 +26,12 @@ export const calculateOperations: INodeProperties[] = [
 				description: 'Calculates the geodistance between two addresses or geopoints',
 				action: 'Geodistance calculator',
 			},
+			{
+				name: 'Geodistance Version 2',
+				value: 'geodistance-v2',
+				description: 'Calculates the geodistance between two addresses or geopoints',
+				action: 'Geodistance calculator',
+			},
 		],
 		default: 'bmi',
 	},
@@ -67,7 +73,7 @@ export const calculateFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['geodistance'],
+				operation: ['geodistance', 'geodistance-v2'],
 				resource: ['calculate'],
 			},
 		},
@@ -80,7 +86,7 @@ export const calculateFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['geodistance'],
+				operation: ['geodistance', 'geodistance-v2'],
 				resource: ['calculate'],
 			},
 		},

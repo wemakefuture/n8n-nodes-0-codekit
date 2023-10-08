@@ -207,6 +207,9 @@ export class CodeKit implements INodeType {
 						break;
 					// Code : https://docs.1saas.co/api-documentation/code
 					case 'business':
+						if (operation === 'isFreeMail') {
+							body.email = this.getNodeParameter('email', i) as string;
+						}
 						if (operation === 'lookupvatrates') {
 							body.countryCode = this.getNodeParameter('countryCode', i) as string;
 						}
@@ -238,6 +241,10 @@ export class CodeKit implements INodeType {
 							operation = 'validate/bic';
 							body.bic = this.getNodeParameter('bic', i) as string;
 						}
+						if (operation === 'verifyGeoLocation') {
+							operation = 'validate/geolocation';
+							body.address = this.getNodeParameter('address', i) as string;
+						}
 						break;
 					case 'calculate':
 						if (operation === 'bmi') {
@@ -245,6 +252,11 @@ export class CodeKit implements INodeType {
 							body.height = this.getNodeParameter('height', i) as string;
 						}
 						if (operation === 'geodistance') {
+							body.startPoint = this.getNodeParameter('startPoint', i) as string;
+							body.endPoint = this.getNodeParameter('endPoint', i) as string;
+						}
+						if (operation === 'geodistanceV2') {
+							operation = 'geodistance-v2';
 							body.startPoint = this.getNodeParameter('startPoint', i) as string;
 							body.endPoint = this.getNodeParameter('endPoint', i) as string;
 						}
@@ -275,11 +287,29 @@ export class CodeKit implements INodeType {
 								body.iso = this.getNodeParameter('iso', i) as string;
 							}
 						}
+						if (operation === 'msgtojson') {
+							const op = this.getNodeParameter('urlbuffertype', 0) as string;
+
+							if (op === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+							if (op === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+						}
 						if (operation === 'currency') {
 							body.amount = this.getNodeParameter('amount', i) as string;
 							body.sourceCurrency = this.getNodeParameter('sourceCurrency', i) as string;
 							body.targetCurrency = this.getNodeParameter('targetCurrency', i) as string;
 							body.date = this.getNodeParameter('date', i);
+						}
+						if (operation === 'csvtoarray') {
+							operation = 'csv/array';
+							body.csv = this.getNodeParameter('csv', i) as string;
+
+							const options = this.getNodeParameter('options', i) as IDataObject;
+							if (options.delimiter) body.delimiter = options.delimiter;
+							if (options.omitFirstRow) body.omitFirstRow = options.omitFirstRow;
 						}
 						if (operation === 'csvtojson') {
 							operation = 'csv/json';
