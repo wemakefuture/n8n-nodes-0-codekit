@@ -13,10 +13,22 @@ export const pdfOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Compress PDF',
+				value: 'compress',
+				description: 'Compress a PDF file',
+				action: 'Compress pdf a pdf',
+			},
+			{
 				name: 'Count PDF Pages',
 				value: 'count',
 				description: 'Count number of pages in a PDF file',
 				action: 'Count pdf pages a pdf',
+			},
+			{
+				name: 'Docx to PDF',
+				value: 'docx-to-pdf',
+				description: 'Converts a docx file to a pdf file',
+				action: 'Docx to pdf a pdf',
 			},
 			{
 				name: 'Get PDF Info Metadata',
@@ -35,6 +47,18 @@ export const pdfOperations: INodeProperties[] = [
 				value: 'merge',
 				description: 'Merge multiple pdf files to a single pdf',
 				action: 'PDF Merge a pdf',
+			},
+			{
+				name: 'PDF to Base64',
+				value: 'base64',
+				description: 'Converts a PDF file to a base64 string',
+				action: 'Pdf to base64 a pdf',
+			},
+			{
+				name: 'PDF to Image',
+				value: 'pdf-to-image',
+				description: 'Converts a PDF file to an image',
+				action: 'Pdf to image a pdf',
 			},
 			{
 				name: 'Split PDF Files',
@@ -56,7 +80,21 @@ export const pdfFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['getinfometadata'],
+				operation: ['getinfometadata', 'base64'],
+				resource: ['pdf'],
+			},
+		},
+		default: '',
+	},
+	{
+		displayName: 'Buffer',
+		name: 'buffer',
+		type: 'string',
+		description: 'Buffer of the PDF',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['docx-to-pdf'],
 				resource: ['pdf'],
 			},
 		},
@@ -69,7 +107,7 @@ export const pdfFields: INodeProperties[] = [
 		description: 'Filename of the PDF',
 		displayOptions: {
 			show: {
-				operation: ['getinfometadata'],
+				operation: ['getinfometadata', 'base64', 'compress', 'docx-to-pdf', 'pdf-to-image'],
 				resource: ['pdf'],
 			},
 		},
@@ -83,7 +121,7 @@ export const pdfFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['count', 'split'],
+				operation: ['count', 'split', 'compress', 'pdf-to-image'],
 				resource: ['pdf'],
 			},
 		},
@@ -104,9 +142,10 @@ export const pdfFields: INodeProperties[] = [
 		name: 'url',
 		type: 'string',
 		required: true,
+		description: 'Public URL of the PDF file',
 		displayOptions: {
 			show: {
-				operation: ['count', 'split'],
+				operation: ['count', 'split', 'compress', 'pdf-to-image'],
 				resource: ['pdf'],
 				datatype: ['url'],
 			},
@@ -118,9 +157,10 @@ export const pdfFields: INodeProperties[] = [
 		name: 'buffer',
 		type: 'string',
 		required: true,
+		description: 'Buffer of the PDF',
 		displayOptions: {
 			show: {
-				operation: ['count', 'split'],
+				operation: ['count', 'split', 'compress', 'pdf-to-image'],
 				resource: ['pdf'],
 				datatype: ['buffer'],
 			},
@@ -417,7 +457,7 @@ export const pdfFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['html', 'merge'],
+				operation: ['html', 'merge', 'compress', 'docx-to-pdf'],
 				resource: ['pdf'],
 			},
 		},

@@ -502,9 +502,31 @@ export class CodeKit implements INodeType {
 							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
 						}
 
-						if (operation === 'getinfometadata') {
+						if (operation === 'getinfometadata' || operation === 'base64') {
 							body.pdf = this.getNodeParameter('pdf', i) as string;
 							body.filename = this.getNodeParameter('filename', i) as string;
+						}
+
+						if (operation === 'compress') {
+							const dataType = this.getNodeParameter('datatype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('datatype', i) as string;
+							}
+							if (dataType === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+							body.filename = this.getNodeParameter('filename', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+						}
+						if (operation === 'docx-to-pdf') {
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.filename = this.getNodeParameter('filename', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+						}
+						if (operation === 'pdf-to-image') {
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.filename = this.getNodeParameter('filename', i) as string;
+							body.url = this.getNodeParameter('url', i) as string;
 						}
 						break;
 					case 'storage':
