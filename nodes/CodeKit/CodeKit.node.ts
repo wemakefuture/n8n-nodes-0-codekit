@@ -501,6 +501,11 @@ export class CodeKit implements INodeType {
 							body.options = this.getNodeParameter('options', i) as IDataObject;
 							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
 						}
+
+						if (operation === 'getinfometadata') {
+							body.pdf = this.getNodeParameter('pdf', i) as string;
+							body.filename = this.getNodeParameter('filename', i) as string;
+						}
 						break;
 					case 'storage':
 						if (operation === 'json') {

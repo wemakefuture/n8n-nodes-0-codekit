@@ -15,13 +15,20 @@ export const pdfOperations: INodeProperties[] = [
 			{
 				name: 'Count PDF Pages',
 				value: 'count',
+				description: 'Count number of pages in a PDF file',
 				action: 'Count pdf pages a pdf',
 			},
 			{
-				name: 'Split PDF Files',
-				value: 'split',
-				description: 'Split a PDF file into multiple files',
-				action: 'Split pdf files a pdf',
+				name: 'Get PDF Info Metadata',
+				value: 'getinfometadata',
+				description: 'Get Info Metadata of a PDF file',
+				action: 'Get pdf info metadata a pdf',
+			},
+			{
+				name: 'HTML to PDF',
+				value: 'html',
+				description: 'Converts HTML Code or a URL to PDF with options',
+				action: 'Html to pdf a pdf',
 			},
 			{
 				name: 'PDF Merge',
@@ -30,10 +37,10 @@ export const pdfOperations: INodeProperties[] = [
 				action: 'PDF Merge a pdf',
 			},
 			{
-				name: 'HTML to PDF',
-				value: 'html',
-				description: 'Converts HTML Code or a URL to PDF with options',
-				action: 'Html to pdf a pdf',
+				name: 'Split PDF Files',
+				value: 'split',
+				description: 'Split a PDF file into multiple files',
+				action: 'Split pdf files a pdf',
 			},
 		],
 		default: 'count',
@@ -41,6 +48,33 @@ export const pdfOperations: INodeProperties[] = [
 ];
 
 export const pdfFields: INodeProperties[] = [
+	{
+		displayName: 'Pdf',
+		name: 'pdf',
+		type: 'string',
+		description: 'PDF can be public URL or Buffer String',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['getinfometadata'],
+				resource: ['pdf'],
+			},
+		},
+		default: '',
+	},
+	{
+		displayName: 'Filename',
+		name: 'filename',
+		type: 'string',
+		description: 'Filename of the PDF',
+		displayOptions: {
+			show: {
+				operation: ['getinfometadata'],
+				resource: ['pdf'],
+			},
+		},
+		default: '',
+	},
 	// pdf: count
 	{
 		displayName: 'URL or Binary Data',
