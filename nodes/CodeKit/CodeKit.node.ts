@@ -362,7 +362,7 @@ export class CodeKit implements INodeType {
 								body.url = this.getNodeParameter('url', i) as string;
 							}
 						}
-						if (operation === 'schortenedurl') {
+						if (operation === 'shortenedUrl') {
 							const shortenedurlop = this.getNodeParameter('shortenedurlop', i) as string;
 							operation = `${operation}/${shortenedurlop}`;
 
@@ -375,6 +375,53 @@ export class CodeKit implements INodeType {
 							if (shortenedurlop === 'del' || shortenedurlop === 'put') {
 								body.identifier = this.getNodeParameter('identifier', i) as number;
 							}
+						}
+						if (operation === 'color') {
+							body.hue = this.getNodeParameter('hue', i) as string;
+							body.luminosity = this.getNodeParameter('luminosity', i) as string;
+							body.count = this.getNodeParameter('count', i) as number;
+							body.seed = this.getNodeParameter('seed', i) as string;
+							body.format = this.getNodeParameter('format', i) as string;
+							body.alpha = this.getNodeParameter('alpha', i) as number;
+						}
+
+						if (operation === 'html-scrape') {
+							body.url = this.getNodeParameter('url', i) as string;
+							body.textOnly = this.getNodeParameter('textOnly', i) as boolean;
+						}
+
+						if (operation === 'jsonwebtoken-decode') {
+							operation = 'jsonwebtoken/decode';
+							body.token = this.getNodeParameter('token', i) as string;
+							body.verify = this.getNodeParameter('verify', i) as boolean;
+							body.secret = this.getNodeParameter('secret', i) as string;
+							body.options = this.getNodeParameter('options', i) as string;
+						}
+
+						if (operation === 'jsonwebtoken-encode') {
+							operation = 'jsonwebtoken/encode';
+							body.data = this.getNodeParameter('data', i) as string;
+							body.secret = this.getNodeParameter('secret', i) as string;
+							body.options = this.getNodeParameter('options', i) as string;
+						}
+
+						if (operation === 'mockdata-user') {
+							operation = 'mockdata/user';
+							body.amount = this.getNodeParameter('amount', i) as number;
+							body.emailRequired = this.getNodeParameter('emailRequired', i) as boolean;
+							body.avatarRequired = this.getNodeParameter('avatarRequired', i) as boolean;
+							body.passwordRequired = this.getNodeParameter('passwordRequired', i) as boolean;
+							body.birthDateRequired = this.getNodeParameter('birthDateRequired', i) as boolean;
+							body.usernameRequired = this.getNodeParameter('usernameRequired', i) as boolean;
+							body.addressRequired = this.getNodeParameter('addressRequired', i) as boolean;
+							body.phoneRequired = this.getNodeParameter('phoneRequired', i) as boolean;
+							body.createdAtRequired = this.getNodeParameter('createdAtRequired', i) as boolean;
+							body.balanceRequired = this.getNodeParameter('balanceRequired', i) as boolean;
+						}
+
+						if (operation === 'picture') {
+							body.keyword = this.getNodeParameter('keyword', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
 						}
 						break;
 					case 'operator':
