@@ -15,6 +15,8 @@ import {
 	convertOperations,
 	cryptoFields,
 	cryptoOperations,
+	dateAndTimeFields,
+	dateAndTimeOperations,
 	generateFields,
 	generateOperations,
 	operatorFields,
@@ -89,6 +91,10 @@ export class CodeKit implements INodeType {
 						value: 'crypto',
 					},
 					{
+						name: 'Date & Time',
+						value: 'dateandtime',
+					},
+					{
 						name: 'Generate',
 						value: 'generate',
 					},
@@ -138,6 +144,9 @@ export class CodeKit implements INodeType {
 			// Storage
 			...storageOperations,
 			...storageFields,
+			// Date & Time
+			...dateAndTimeOperations,
+			...dateAndTimeFields,
 		],
 	};
 
@@ -627,6 +636,16 @@ export class CodeKit implements INodeType {
 							if (permfilesop === 'get') {
 								body.getAsUrl = this.getNodeParameter('getAsUrl', i) as string;
 							}
+						}
+						break;
+
+					case 'dateandtime':
+						if (operation === 'calendarweek') {
+							body.date = this.getNodeParameter('date', i) as string;
+							body.unixTimestamp = this.getNodeParameter('unixTimestamp', i) as number;
+							body.year = this.getNodeParameter('year', i) as string;
+							body.weekNumber = this.getNodeParameter('weekNumber', i) as number;
+							body.outputFormat = this.getNodeParameter('outputFormat', i) as string;
 						}
 						break;
 					default:

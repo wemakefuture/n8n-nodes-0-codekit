@@ -8,3 +8,4 @@ export * from './GenerateDescription';
 export * from './OperatorDescription';
 export * from './PdfDescription';
 export * from './StorageDescription';
+export * from './DateAndTimeDescription';
