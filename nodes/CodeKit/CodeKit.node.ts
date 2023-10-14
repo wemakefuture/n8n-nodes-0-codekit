@@ -384,7 +384,11 @@ export class CodeKit implements INodeType {
 						if (operation === 'splitname') {
 							body.name = this.getNodeParameter('name', i) as string;
 						}
-						if (operation === 'urlexpander') {
+						if (
+							operation === 'urlexpander' ||
+							operation === 'parseurlquery' ||
+							operation === 'logo'
+						) {
 							body.url = this.getNodeParameter('url', i) as string;
 						}
 						if (operation === 'advancedswitch') {

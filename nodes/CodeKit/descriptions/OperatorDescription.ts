@@ -32,6 +32,18 @@ export const operatorOperations: INodeProperties[] = [
 				action: 'Expand URL',
 			},
 			{
+				name: 'Get Logo From URL',
+				value: 'logo',
+				description: 'Get the logo from a URL',
+				action: 'Get logo from URL',
+			},
+			{
+				name: 'Parse URL Query',
+				value: 'parseurlquery',
+				description: 'Parse the query of an URL',
+				action: 'Parse URL query',
+			},
+			{
 				name: 'Scheduler',
 				value: 'scheduler',
 				description: 'Schedule a Cronjob or a Timer for a Webhook',
@@ -339,7 +351,7 @@ export const operatorFields = [
 		required: true,
 		displayOptions: {
 			show: {
-				operation: ['utm'],
+				operation: ['utm', 'parseurlquery', 'logo'],
 				resource: ['operator'],
 			},
 		},
