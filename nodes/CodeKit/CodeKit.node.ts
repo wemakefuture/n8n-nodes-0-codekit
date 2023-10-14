@@ -132,6 +132,9 @@ export class CodeKit implements INodeType {
 			// Crypto
 			...cryptoOperations,
 			...cryptoFields,
+			// Date & Time
+			...dateAndTimeOperations,
+			...dateAndTimeFields,
 			// Generate
 			...generateOperations,
 			...generateFields,
@@ -144,9 +147,6 @@ export class CodeKit implements INodeType {
 			// Storage
 			...storageOperations,
 			...storageFields,
-			// Date & Time
-			...dateAndTimeOperations,
-			...dateAndTimeFields,
 		],
 	};
 
@@ -646,6 +646,40 @@ export class CodeKit implements INodeType {
 							body.year = this.getNodeParameter('year', i) as string;
 							body.weekNumber = this.getNodeParameter('weekNumber', i) as number;
 							body.outputFormat = this.getNodeParameter('outputFormat', i) as string;
+						}
+						if (operation === 'detailperiod') {
+							body.startDate = this.getNodeParameter('startDate', i) as string;
+							body.duration = this.getNodeParameter('duration', i) as number;
+						}
+						if (operation === 'holidays') {
+							body.year = this.getNodeParameter('year', i) as string;
+							body.countryCode = this.getNodeParameter('countryCode', i) as string;
+							body.state = this.getNodeParameter('state', i) as string;
+						}
+						if (operation === 'isweekend') {
+							body.dayNumber = this.getNodeParameter('dayNumber', i) as number;
+							body.weekDay = this.getNodeParameter('weekDay', i) as string;
+							body.isWeekend = this.getNodeParameter('isWeekend', i) as boolean;
+						}
+						if (operation === 'month') {
+							const options = {
+								timeStamp: false,
+								iso: false,
+							};
+							options.timeStamp = this.getNodeParameter('timeStamp', i) as boolean;
+							options.iso = this.getNodeParameter('iso', i) as boolean;
+							body.date = this.getNodeParameter('date', i) as string;
+							body.dateFormat = this.getNodeParameter('dateFormat', i) as string;
+							body.outputFormat = this.getNodeParameter('outputFormat', i) as string;
+							body.month = this.getNodeParameter('month', i) as string;
+							body.year = this.getNodeParameter('year', i) as string;
+							body.options = options;
+						}
+						if (operation === 'switchtimezone') {
+							body.inputTime = this.getNodeParameter('inputTime', i) as string;
+							body.inputTimeZone = this.getNodeParameter('inputTimeZone', i) as string;
+							body.formatPattern = this.getNodeParameter('formatPattern', i) as string;
+							body.destinationTimeZone = this.getNodeParameter('destinationTimeZone', i) as string;
 						}
 						break;
 					default:
