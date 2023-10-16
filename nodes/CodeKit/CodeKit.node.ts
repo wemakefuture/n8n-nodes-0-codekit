@@ -712,8 +712,41 @@ export class CodeKit implements INodeType {
 					case 'image':
 						break;
 					case 'text':
+						if (operation === 'comparestring') {
+							body.string1 = this.getNodeParameter('string1', i) as string;
+							body.string2 = this.getNodeParameter('string2', i) as string;
+							body.algorithm = this.getNodeParameter('algorithm', i) as string;
+						}
+						if (operation === 'contains') {
+							body.text = this.getNodeParameter('text', i) as string;
+							body.keyword = this.getNodeParameter('keyword', i) as string;
+							// remove space, and then split by comma
+							const keywordList = (this.getNodeParameter('keywordList', i) as string)
+								.trim()
+								.split(',');
+							body.keywordList = keywordList;
+							const options = {
+								caseSensitive: false,
+								onlyCompleteWords: false,
+							};
+							options.caseSensitive = this.getNodeParameter('caseSensitive', i) as boolean;
+							options.onlyCompleteWords = this.getNodeParameter('onlyCompleteWords', i) as boolean;
+							body.options = options;
+						}
+						if (operation === 'extractor') {
+							body.start = this.getNodeParameter('start', i) as string;
+							body.end = this.getNodeParameter('end', i) as string;
+							body.body = this.getNodeParameter('body', i) as string;
+							body.greedy = this.getNodeParameter('greedy', i) as boolean;
+						}
 						break;
 					case 'user':
+						if (operation === 'getipaddress') {
+							// no body
+						}
+						if (operation === 'retrievecredits') {
+							// no body
+						}
 						break;
 					default:
 						break;

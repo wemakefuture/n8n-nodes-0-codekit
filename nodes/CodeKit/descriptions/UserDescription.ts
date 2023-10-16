@@ -14,7 +14,7 @@ export const userOperations: INodeProperties[] = [
 		options: [
 			{
 				name: 'Get Available IP Addresses',
-				value: 'getipaddresses',
+				value: 'getipaddress',
 				description: 'Get IP addresses that are available to use',
 				action: 'Get available IP addresses',
 			},
