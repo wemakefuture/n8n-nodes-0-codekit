@@ -19,12 +19,18 @@ import {
 	dateAndTimeOperations,
 	generateFields,
 	generateOperations,
+	imageFields,
+	imageOperations,
 	operatorFields,
 	operatorOperations,
 	pdfFields,
 	pdfOperations,
 	storageFields,
 	storageOperations,
+	textFields,
+	textOperations,
+	userFields,
+	userOperations,
 } from './descriptions';
 
 import { codeKitRequest, mapArrayOfObjectsToStringArray } from './GenericFunctions';
@@ -99,6 +105,10 @@ export class CodeKit implements INodeType {
 						value: 'generate',
 					},
 					{
+						name: 'Image',
+						value: 'image',
+					},
+					{
 						name: 'Operator',
 						value: 'operator',
 					},
@@ -109,6 +119,14 @@ export class CodeKit implements INodeType {
 					{
 						name: 'Storage',
 						value: 'storage',
+					},
+					{
+						name: 'Text',
+						value: 'text',
+					},
+					{
+						name: 'User',
+						value: 'user',
 					},
 				],
 				default: 'ai',
@@ -138,6 +156,9 @@ export class CodeKit implements INodeType {
 			// Generate
 			...generateOperations,
 			...generateFields,
+			// Image
+			...imageOperations,
+			...imageFields,
 			// Operator
 			...operatorOperations,
 			...operatorFields,
@@ -147,6 +168,12 @@ export class CodeKit implements INodeType {
 			// Storage
 			...storageOperations,
 			...storageFields,
+			// Text
+			...textOperations,
+			...textFields,
+			// User
+			...userOperations,
+			...userFields,
 		],
 	};
 
@@ -638,7 +665,6 @@ export class CodeKit implements INodeType {
 							}
 						}
 						break;
-
 					case 'dateandtime':
 						if (operation === 'calendarweek') {
 							body.date = this.getNodeParameter('date', i) as string;
@@ -681,6 +707,13 @@ export class CodeKit implements INodeType {
 							body.formatPattern = this.getNodeParameter('formatPattern', i) as string;
 							body.destinationTimeZone = this.getNodeParameter('destinationTimeZone', i) as string;
 						}
+						break;
+
+					case 'image':
+						break;
+					case 'text':
+						break;
+					case 'user':
 						break;
 					default:
 						break;
