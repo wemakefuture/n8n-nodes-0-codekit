@@ -710,6 +710,113 @@ export class CodeKit implements INodeType {
 						break;
 
 					case 'image':
+						if (operation === 'blur' || operation === 'sharpen') {
+							const dataType = this.getNodeParameter('urlbuffertype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+							if (dataType === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+							body.sigma = this.getNodeParameter('sigma', i) as number;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'convert') {
+							const dataType = this.getNodeParameter('urlbuffertype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+							if (dataType === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+							body.outputFormat = this.getNodeParameter('outputFormat', i) as string;
+							body.withMetaData = this.getNodeParameter('withMetaData', i) as boolean;
+							body.options = this.getNodeParameter('options', i) as IDataObject;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'crop') {
+							const dataType = this.getNodeParameter('urlbuffertype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+							if (dataType === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+							body.axis = this.getNodeParameter('axis', i) as string;
+							body.options = this.getNodeParameter('options', i) as IDataObject;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'exif') {
+							const dataType = this.getNodeParameter('urlbuffertype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+							if (dataType === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+						}
+						if (operation === 'flip') {
+							const dataType = this.getNodeParameter('urlbuffertype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+							if (dataType === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+							body.axis = this.getNodeParameter('axis', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'html') {
+							const dataType = this.getNodeParameter('htmlurltype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+							if (dataType === 'html') {
+								body.html = this.getNodeParameter('html', i) as string;
+							}
+							body.options = this.getNodeParameter('options', i) as IDataObject;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'overlay') {
+							body.frontImageUrl = this.getNodeParameter('frontImageUrl', i) as string;
+							body.backImageUrl = this.getNodeParameter('backImageUrl', i) as string;
+							body.position = this.getNodeParameter('position', i) as string;
+							body.options = this.getNodeParameter('options', i) as IDataObject;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'resize') {
+							const dataType = this.getNodeParameter('urlbuffertype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+							if (dataType === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+							body.width = this.getNodeParameter('width', i) as number;
+							body.height = this.getNodeParameter('height', i) as number;
+							body.options = this.getNodeParameter('options', i) as IDataObject;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'rotate') {
+							const dataType = this.getNodeParameter('urlbuffertype', i) as string;
+							if (dataType === 'url') {
+								body.url = this.getNodeParameter('url', i) as string;
+							}
+							if (dataType === 'buffer') {
+								body.buffer = this.getNodeParameter('buffer', i) as string;
+							}
+							body.angle = this.getNodeParameter('angle', i) as number;
+							body.background = this.getNodeParameter('background', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
 						break;
 					case 'text':
 						if (operation === 'comparestring') {
