@@ -172,9 +172,9 @@ export const convertFields: INodeProperties[] = [
 		default: '',
 	},
 	{
-		displayName: 'Date',
-		name: 'date',
-		type: 'dateTime',
+		displayName: 'Date Format',
+		name: 'dateFormat',
+		type: 'string',
 		displayOptions: {
 			show: {
 				operation: ['currency'],
@@ -182,7 +182,7 @@ export const convertFields: INodeProperties[] = [
 			},
 		},
 		default: '',
-		description: 'Convert currency to how it used to be in the past',
+		description: 'Date format in which the date should be returned e.g. YYYY-MM-DD',
 	},
 	// convert: csvtojson
 	{

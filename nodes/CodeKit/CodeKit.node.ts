@@ -337,7 +337,7 @@ export class CodeKit implements INodeType {
 							body.amount = this.getNodeParameter('amount', i) as string;
 							body.sourceCurrency = this.getNodeParameter('sourceCurrency', i) as string;
 							body.targetCurrency = this.getNodeParameter('targetCurrency', i) as string;
-							body.date = this.getNodeParameter('date', i);
+							body.dateFormat = this.getNodeParameter('dateFormat', i);
 						}
 						if (operation === 'csvtoarray') {
 							operation = 'csv/array';
