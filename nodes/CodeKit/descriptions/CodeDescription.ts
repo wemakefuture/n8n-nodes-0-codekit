@@ -35,7 +35,7 @@ export const codeOperations: INodeProperties[] = [
 				value: 'run-js-scripts-hosted-on-0codekit',
 				description: 'This operation executes JavaScript scripts hosted on the 0CodeKit platform',
 				action: 'Executes java script scripts hosted on the 0 code kit platform',
-			}
+			},
 		],
 		default: 'javascript',
 	},
@@ -158,7 +158,7 @@ export const codeFields: INodeProperties[] = [
 		},
 		typeOptions: {
 			loadOptionsMethod: 'getRowKey',
-			multipleValues: false
+			multipleValues: false,
 		},
 		default: '',
 		description: 'Select the name of the function created in 0-codekit account. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
@@ -203,5 +203,5 @@ export const codeFields: INodeProperties[] = [
 				],
 			},
 		],
-	}
+	},
 ];

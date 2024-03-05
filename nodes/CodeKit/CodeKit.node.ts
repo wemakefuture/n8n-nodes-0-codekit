@@ -33,7 +33,7 @@ import {
 	userOperations,
 } from './descriptions';
 
-import { IRowKeyResponseItem, InputItem, OutputObject, codeKitRequest, codeKitRequestLoadOptions, mapArrayOfObjectsToStringArray, transformArrayToObject } from './GenericFunctions';
+import { codeKitRequest, codeKitRequestLoadOptions, InputItem, IRowKeyResponseItem, mapArrayOfObjectsToStringArray, OutputObject, transformArrayToObject } from './GenericFunctions';
 
 type MergeFiles = {
 	files: {
@@ -211,9 +211,9 @@ export class CodeKit implements INodeType {
 					}
 			}
 			return returnData;
-			}
-		}
-	}
+			},
+		},
+	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
@@ -350,17 +350,17 @@ export class CodeKit implements INodeType {
 
 						if(operation === 'run-js-scripts-hosted-on-0codekit'){
 
-							resource = 'editor'
-							operation = 'make'
-							let rowKey = this.getNodeParameter('rowKey', i) as string
-							qs.rowKey = rowKey
+							resource = 'editor';
+							operation = 'make';
+							const rowKey = this.getNodeParameter('rowKey', i) as string;
+							qs.rowKey = rowKey;
 
-							let variablesUI = this.getNodeParameter('codeVariablesUi', i) as IDataObject;
-							let codeVariablesValues = variablesUI.codeVariablesValues
+							const variablesUI = this.getNodeParameter('codeVariablesUi', i) as IDataObject;
+							const codeVariablesValues = variablesUI.codeVariablesValues;
 							if(codeVariablesValues){
 								const inputArray = codeVariablesValues as InputItem[];
 								const transformedObject: OutputObject = transformArrayToObject(inputArray);
-								Object.assign(body, transformedObject)
+								Object.assign(body, transformedObject);
 							}
 						}
 

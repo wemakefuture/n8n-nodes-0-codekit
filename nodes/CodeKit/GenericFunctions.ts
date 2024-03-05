@@ -88,6 +88,7 @@ export function mapArrayOfObjectsToStringArray(objectsArr : IDataObject[]){
 
 export interface InputItem {
 	property: string;
+	// tslint:disable-next-line:no-any
 	value: any;
 }
 
