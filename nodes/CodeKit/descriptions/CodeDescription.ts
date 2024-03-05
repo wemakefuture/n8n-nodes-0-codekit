@@ -30,6 +30,12 @@ export const codeOperations: INodeProperties[] = [
 				description: 'Run async python via API',
 				action: 'Runs async python via api',
 			},
+			{
+				name: 'Run JS Scripts Hosted on 0CodeKit',
+				value: 'run-js-scripts-hosted-on-0codekit',
+				description: 'This operation executes JavaScript scripts hosted on the 0CodeKit platform',
+				action: 'Executes java script scripts hosted on the 0 code kit platform',
+			}
 		],
 		default: 'javascript',
 	},
@@ -136,4 +142,66 @@ export const codeFields: INodeProperties[] = [
 		default: '',
 		description: 'Webhook URL where the result will be sent to after finishing the execution',
 	},
+
+	// code: Run JS Scripts hosted on 0CodeKit
+
+	{
+		displayName: 'Code Name or ID',
+		name: 'rowKey',
+		type: 'options',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['run-js-scripts-hosted-on-0codekit'],
+				resource: ['code'],
+			},
+		},
+		typeOptions: {
+			loadOptionsMethod: 'getRowKey',
+			multipleValues: false
+		},
+		default: '',
+		description: 'Select the name of the function created in 0-codekit account. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+	},
+
+	{
+		displayName: 'Code Variables',
+		name: 'codeVariablesUi',
+		placeholder: 'Add Code Variable',
+		type: 'fixedCollection',
+		typeOptions: {
+			multipleValues: true,
+		},
+		default: {},
+		options: [
+			{
+				name: 'codeVariablesValues',
+				displayName: 'Code Variable',
+				values: [
+					{
+						displayName: 'Variable Name or ID',
+						name: 'property',
+						type: 'options',
+						typeOptions: {
+							loadOptionsMethod: 'getCodeVariablesArray',
+							loadOptionsDependsOn: [
+											'rowKey',
+										],
+						},
+						default: '',
+						description:
+							'Name of the variable defined in code editor for selected function. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+					},
+					{
+						displayName: 'Value',
+						name: 'value',
+						type: 'string',
+						default: '',
+						required: true,
+						description: 'Value of the variable',
+					},
+				],
+			},
+		],
+	}
 ];

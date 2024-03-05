@@ -1,6 +1,6 @@
 import { IExecuteFunctions } from 'n8n-core';
 
-import { IDataObject, INodeExecutionData, INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { IDataObject, ILoadOptionsFunctions, INodeExecutionData, INodePropertyOptions, INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 import {
 	aiFields,
@@ -33,7 +33,7 @@ import {
 	userOperations,
 } from './descriptions';
 
-import { codeKitRequest, mapArrayOfObjectsToStringArray } from './GenericFunctions';
+import { IRowKeyResponseItem, InputItem, OutputObject, codeKitRequest, codeKitRequestLoadOptions, mapArrayOfObjectsToStringArray, transformArrayToObject } from './GenericFunctions';
 
 type MergeFiles = {
 	files: {
@@ -175,7 +175,45 @@ export class CodeKit implements INodeType {
 			...userOperations,
 			...userFields,
 		],
+
 	};
+
+	methods = {
+		loadOptions: {
+			async getRowKey(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+				const returnData: INodePropertyOptions[] = [];
+				const resource = 'editor/make';
+				const response = await codeKitRequestLoadOptions.call(this, 'GET', resource, {}) as IRowKeyResponseItem[];
+				if (Array.isArray(response) && response.every(item => typeof item === 'object' && 'label' in item && 'value' in item)) {
+						response.forEach((property: IRowKeyResponseItem) => {
+								returnData.push({
+										name: property.label,
+										value: property.value,
+								});
+						});
+				}
+				return returnData;
+		},
+		async getCodeVariablesArray(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+			const returnData: INodePropertyOptions[] = [];
+			const rowKey = this.getCurrentNodeParameter('rowKey') as string;
+			const resource = `editor/make-variables?rowKey=${rowKey}`;
+			const response = await codeKitRequestLoadOptions.call(this, 'GET', resource, {});
+			if (typeof response === 'object' && response !== null) {
+					const variablesResponse = response as { variables: string[] };
+					if (Array.isArray(variablesResponse.variables)) {
+							variablesResponse.variables.forEach((variable) => {
+									returnData.push({
+											name: variable,
+											value: variable,
+									});
+							});
+					}
+			}
+			return returnData;
+			}
+		}
+	}
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
@@ -185,7 +223,7 @@ export class CodeKit implements INodeType {
 		let responseData;
 		for (let i = 0; i < length; i++) {
 			try {
-				const resource = this.getNodeParameter('resource', 0) as string;
+				let resource = this.getNodeParameter('resource', 0) as string;
 				let operation = this.getNodeParameter('operation', 0) as string;
 				const body = {} as IDataObject;
 
@@ -298,7 +336,9 @@ export class CodeKit implements INodeType {
 						}
 						break;
 					case 'code':
+					if(operation !== 'run-js-scripts-hosted-on-0codekit'){
 						body.code = this.getNodeParameter('code', i) as string;
+					}
 						if (operation === 'async-python') {
 							body.sendTo = this.getNodeParameter('sendTo', i) as string;
 
@@ -306,6 +346,22 @@ export class CodeKit implements INodeType {
 							const requirementsValues = requirementsUI.requirementsValues as IDataObject[];
 
 							body.requirements = mapArrayOfObjectsToStringArray(requirementsValues);
+						}
+
+						if(operation === 'run-js-scripts-hosted-on-0codekit'){
+
+							resource = 'editor'
+							operation = 'make'
+							let rowKey = this.getNodeParameter('rowKey', i) as string
+							qs.rowKey = rowKey
+
+							let variablesUI = this.getNodeParameter('codeVariablesUi', i) as IDataObject;
+							let codeVariablesValues = variablesUI.codeVariablesValues
+							if(codeVariablesValues){
+								const inputArray = codeVariablesValues as InputItem[];
+								const transformedObject: OutputObject = transformArrayToObject(inputArray);
+								Object.assign(body, transformedObject)
+							}
 						}
 
 						break;
@@ -860,7 +916,7 @@ export class CodeKit implements INodeType {
 				}
 
 				// No Code Helper
-				responseData = await codeKitRequest.call(this, 'POST', `${resource}/${operation}`, body);
+				responseData = await codeKitRequest.call(this, 'POST', `${resource}/${operation}`, body, qs);
 
 				if (Array.isArray(responseData)) {
 					returnData.push.apply(returnData, responseData as IDataObject[]);
