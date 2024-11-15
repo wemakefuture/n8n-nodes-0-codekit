@@ -25,6 +25,12 @@ export const businessOperations: INodeProperties[] = [
 				action: 'Lookup VAT rates',
 			},
 			{
+				name: 'Validate Phonenumber',
+				value: 'validatePhonenumber',
+				description: 'Validates the phone number if it is either a possible or existing phone number',
+				action: 'Validate phone number',
+			},
+			{
 				name: 'Verify a Domain',
 				value: 'verifyDomain',
 				description: 'Verifies a top-level- or subdomain',
@@ -230,4 +236,33 @@ export const businessFields = [
 		},
 		default: '',
 	},
+	// business: validate/phonenumber
+	{
+		displayName: 'Phone Number',
+		name: 'phoneNumber',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['validatePhonenumber'],
+				resource: ['business'],
+			},
+		},
+		default: '',
+		placeholder: '+99 123456789',
+	},
+	{
+		displayName: 'Country Code',
+		name: 'countryCode',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['validatePhonenumber'],
+				resource: ['business'],
+			},
+		},
+		default: '',
+		placeholder: 'GB',
+	},
+
 ] as INodeProperties[];

@@ -185,32 +185,32 @@ export class CodeKit implements INodeType {
 				const resource = 'editor/make';
 				const response = await codeKitRequestLoadOptions.call(this, 'GET', resource, {}) as IRowKeyResponseItem[];
 				if (Array.isArray(response) && response.every(item => typeof item === 'object' && 'label' in item && 'value' in item)) {
-						response.forEach((property: IRowKeyResponseItem) => {
-								returnData.push({
-										name: property.label,
-										value: property.value,
-								});
+					response.forEach((property: IRowKeyResponseItem) => {
+						returnData.push({
+							name: property.label,
+							value: property.value,
 						});
+					});
 				}
 				return returnData;
-		},
-		async getCodeVariablesArray(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-			const returnData: INodePropertyOptions[] = [];
-			const rowKey = this.getCurrentNodeParameter('rowKey') as string;
-			const resource = `editor/make-variables?rowKey=${rowKey}`;
-			const response = await codeKitRequestLoadOptions.call(this, 'GET', resource, {});
-			if (typeof response === 'object' && response !== null) {
+			},
+			async getCodeVariablesArray(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+				const returnData: INodePropertyOptions[] = [];
+				const rowKey = this.getCurrentNodeParameter('rowKey') as string;
+				const resource = `editor/make-variables?rowKey=${rowKey}`;
+				const response = await codeKitRequestLoadOptions.call(this, 'GET', resource, {});
+				if (typeof response === 'object' && response !== null) {
 					const variablesResponse = response as { variables: string[] };
 					if (Array.isArray(variablesResponse.variables)) {
-							variablesResponse.variables.forEach((variable) => {
-									returnData.push({
-											name: variable,
-											value: variable,
-									});
+						variablesResponse.variables.forEach((variable) => {
+							returnData.push({
+								name: variable,
+								value: variable,
 							});
+						});
 					}
-			}
-			return returnData;
+				}
+				return returnData;
 			},
 		},
 	};
@@ -277,6 +277,12 @@ export class CodeKit implements INodeType {
 						) {
 							body.prompt = this.getNodeParameter('prompt', i) as string;
 						}
+						if (
+							operation === 'generateJavascriptCode' ||
+							operation === 'generatePythonCode'
+						) {
+							body.prompt = this.getNodeParameter('prompt', i) as string;
+						}
 
 						break;
 					// Code : https://docs.1saas.co/api-documentation/code
@@ -319,6 +325,11 @@ export class CodeKit implements INodeType {
 							operation = 'validate/geolocation';
 							body.address = this.getNodeParameter('address', i) as string;
 						}
+						if (operation === 'validatePhonenumber') {
+							operation = 'validate/phonenumber';
+							body.phoneNumber = this.getNodeParameter('phoneNumber', i) as string;
+							body.countryCode = this.getNodeParameter('countryCode', i) as string;
+						}
 						break;
 					case 'calculate':
 						if (operation === 'bmi') {
@@ -336,9 +347,9 @@ export class CodeKit implements INodeType {
 						}
 						break;
 					case 'code':
-					if(operation !== 'run-js-scripts-hosted-on-0codekit'){
-						body.code = this.getNodeParameter('code', i) as string;
-					}
+						if (operation !== 'run-js-scripts-hosted-on-0codekit') {
+							body.code = this.getNodeParameter('code', i) as string;
+						}
 						if (operation === 'async-python') {
 							body.sendTo = this.getNodeParameter('sendTo', i) as string;
 
@@ -348,7 +359,7 @@ export class CodeKit implements INodeType {
 							body.requirements = mapArrayOfObjectsToStringArray(requirementsValues);
 						}
 
-						if(operation === 'run-js-scripts-hosted-on-0codekit'){
+						if (operation === 'run-js-scripts-hosted-on-0codekit') {
 
 							resource = 'editor';
 							operation = 'make';
@@ -357,7 +368,7 @@ export class CodeKit implements INodeType {
 
 							const variablesUI = this.getNodeParameter('codeVariablesUi', i) as IDataObject;
 							const codeVariablesValues = variablesUI.codeVariablesValues;
-							if(codeVariablesValues){
+							if (codeVariablesValues) {
 								const inputArray = codeVariablesValues as InputItem[];
 								const transformedObject: OutputObject = transformArrayToObject(inputArray);
 								Object.assign(body, transformedObject);
@@ -585,13 +596,23 @@ export class CodeKit implements INodeType {
 								body.utm = utm;
 							}
 						}
+						if (operation === 'htmlparser') {
+							operation = operation + '/get';
+							body.html = this.getNodeParameter('html', i) as string;
+							body.url = this.getNodeParameter('url', i) as string;
+							body.all = this.getNodeParameter('all', i) as boolean;
+							body.selector = this.getNodeParameter('selector', i) as string;
+							body.tagSelector = this.getNodeParameter('tagSelector', i) as string;
+							body.idSelector = this.getNodeParameter('idSelector', i) as string;
+							body.classSelector = this.getNodeParameter('classSelector', i) as string;
+						}
 						break;
 					case 'pdf':
 						if (operation === 'count' || operation === 'split') {
 							const dataType = this.getNodeParameter('datatype', i) as string;
 
 							if (dataType === 'url') {
-								body.url = this.getNodeParameter('datatype', i) as string;
+								body.url = this.getNodeParameter('url', i) as string;
 							}
 
 							if (dataType === 'buffer') {
@@ -647,29 +668,167 @@ export class CodeKit implements INodeType {
 
 						if (operation === 'getinfometadata' || operation === 'base64') {
 							body.pdf = this.getNodeParameter('pdf', i) as string;
-							body.filename = this.getNodeParameter('filename', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
 						}
 
 						if (operation === 'compress') {
 							const dataType = this.getNodeParameter('datatype', i) as string;
 							if (dataType === 'url') {
-								body.url = this.getNodeParameter('datatype', i) as string;
+								body.url = this.getNodeParameter('url', i) as string;
 							}
 							if (dataType === 'buffer') {
 								body.buffer = this.getNodeParameter('buffer', i) as string;
 							}
-							body.filename = this.getNodeParameter('filename', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
 							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
 						}
 						if (operation === 'docx-to-pdf') {
 							body.buffer = this.getNodeParameter('buffer', i) as string;
-							body.filename = this.getNodeParameter('filename', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
 							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
 						}
 						if (operation === 'pdf-to-image') {
 							body.buffer = this.getNodeParameter('buffer', i) as string;
-							body.filename = this.getNodeParameter('filename', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
 							body.url = this.getNodeParameter('url', i) as string;
+						}
+						//pages
+						if (operation === 'pages') {
+							const pageOperation = this.getNodeParameter('pagesop', i) as string;
+							operation = `${operation}/${pageOperation}`;
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as string;
+							
+							if (pageOperation === 'rotate') {
+								body.rotate = this.getNodeParameter('rotate', i) as string;
+								body.pages = this.getNodeParameter('pages', i) as string;
+							}
+							if (pageOperation === 'remove') {
+								// Leave empty
+								body.pages = this.getNodeParameter('pages', i) as string;
+							}
+							if (pageOperation === 'resize') {
+
+								body.width = this.getNodeParameter('width', i) as string;
+								body.height = this.getNodeParameter('height', i) as string;
+								body.pages = this.getNodeParameter('pages', i) as string;
+							}
+							if (pageOperation === 'add') {
+								body.width = this.getNodeParameter('width', i) as string;
+								body.height = this.getNodeParameter('height', i) as string;
+								const pageIndices = this.getNodeParameter('pages', i) as number[];
+								body.pages = pageIndices
+							}
+						}
+						if (operation === 'draw') {
+							const drawOperation = this.getNodeParameter('drawop', i) as string;
+							operation = `${operation}/${drawOperation}`;
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.pages = this.getNodeParameter('pages', i) as string;
+							body.anchor = this.getNodeParameter('anchor', i) as string;
+							body.anchor = this.getNodeParameter('align', i) as string;
+							body.x = this.getNodeParameter('x', i) as number;
+							body.y = this.getNodeParameter('y', i) as number;
+							body.rotate = this.getNodeParameter('rotate', i) as string;
+							body.pages = this.getNodeParameter('pages', i) as string;
+
+							if (drawOperation === 'image') {
+								body.imageUrl = this.getNodeParameter('imageUrl', i) as string;
+								body.imageBuffer = this.getNodeParameter('imageBuffer', i) as string;
+								body.width = this.getNodeParameter('width', i) as string;
+								body.height = this.getNodeParameter('height', i) as string;
+							}
+							if (drawOperation === 'text') {
+								body.text = this.getNodeParameter('text', i) as string;
+								body.size = this.getNodeParameter('size', i) as string;
+								body.color = this.getNodeParameter('color', i) as string;
+								body.font = this.getNodeParameter('font', i) as string;
+							}
+							console.log(body)
+
+						}
+						if (operation === 'watermark') {
+							const watermarkOperation = this.getNodeParameter('watermarkop', i) as string;
+							operation = `${operation}/${watermarkOperation}`;
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.pages = this.getNodeParameter('pages', i) as string;
+							body.anchor = this.getNodeParameter('anchor', i) as string;
+							body.anchor = this.getNodeParameter('align', i) as string;
+							body.x = this.getNodeParameter('x', i) as number;
+							body.y = this.getNodeParameter('y', i) as number;
+							body.rotate = this.getNodeParameter('rotate', i) as number;
+							body.spacing = this.getNodeParameter('spacing', i) as number;
+							body.opacity = this.getNodeParameter('opacity', i) as number;
+							body.pages = this.getNodeParameter('pages', i) as string;
+							body.repeat = this.getNodeParameter('repeat', i) as string;
+
+							if (watermarkOperation === 'image') {
+								body.imageUrl = this.getNodeParameter('imageUrl', i) as string;
+								body.imageBuffer = this.getNodeParameter('imageBuffer', i) as string;
+								body.width = this.getNodeParameter('width', i) as string;
+								body.height = this.getNodeParameter('height', i) as string;
+							}
+							if (watermarkOperation === 'text') {
+								body.text = this.getNodeParameter('text', i) as string;
+								body.size = this.getNodeParameter('size', i) as string;
+								body.color = this.getNodeParameter('color', i) as string;
+								body.font = this.getNodeParameter('font', i) as string;
+							}
+							console.log(body)
+						}
+						if (operation === 'metadata') {
+							const metadataOperation = this.getNodeParameter('metadataop', i) as string;
+							operation = `${operation}/${metadataOperation}`;
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+
+							if (metadataOperation === 'info') {
+
+							}
+							if (metadataOperation === 'edit') {
+								body.fileName = this.getNodeParameter('fileName', i) as string;
+								body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+								body.title = this.getNodeParameter('title', i) as string;
+								body.author = this.getNodeParameter('author', i) as string;
+								body.subject = this.getNodeParameter('subject', i) as string;
+								body.keywords = this.getNodeParameter('keywords', i) as string;
+							}
+							console.log(body)
+						}
+						if (operation === 'encrypt') {
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.userPassword = this.getNodeParameter('userPassword', i) as string;
+							body.ownerPassword = this.getNodeParameter('ownerPassword', i) as string;
+
+						}
+						if (operation === 'decrypt') {
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.password = this.getNodeParameter('password', i) as string;
+						}
+						if (operation === 'create') {
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.pages = this.getNodeParameter('pages', i) as number;
+							body.width = this.getNodeParameter('width', i) as number;
+							body.height = this.getNodeParameter('height', i) as number;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'markdowntostring') {
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.markdowntostring = this.getNodeParameter('markdownString', i) as string;
+							body.css = this.getNodeParameter('css', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
 						}
 						break;
 					case 'storage':
@@ -692,13 +851,13 @@ export class CodeKit implements INodeType {
 							if (globalvariablesop === 'add' || globalvariablesop === 'get') {
 								body.variableName = this.getNodeParameter('variableName', i) as string;
 							}
-
 							if (globalvariablesop === 'add') {
 								body.variableValue = this.getNodeParameter('variableValue', i) as string;
 							}
 							if (globalvariablesop === 'del') {
 								body.variableId = this.getNodeParameter('variableId', i) as string;
 							}
+
 						}
 						if (operation === 'temp') {
 							body.buffer = this.getNodeParameter('buffer', i) as string;
@@ -901,6 +1060,10 @@ export class CodeKit implements INodeType {
 							body.end = this.getNodeParameter('end', i) as string;
 							body.body = this.getNodeParameter('body', i) as string;
 							body.greedy = this.getNodeParameter('greedy', i) as boolean;
+						}
+						if (operation === 'regex') {
+							body.text = this.getNodeParameter('text', i) as string;
+							body.expression = this.getNodeParameter('end', i) as string;
 						}
 						break;
 					case 'user':

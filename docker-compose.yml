@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - '5678:5678'  # Expose n8n on port 5678
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=Test  # Update to your desired user
+      - N8N_BASIC_AUTH_PASSWORD=Test  # Update to your desired password
+      - N8N_CUSTOM_EXTENSIONS=/home/node/.n8n/dist  # Set custom extensions to dist folder
+    volumes:
+      - ./data:/root/.n8n  # Persist n8n data (workflows, credentials, etc.)
+      - ./dist:/home/node/.n8n/dist  # Mount compiled JS files into the container
+    tty: true

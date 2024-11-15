@@ -33,6 +33,7 @@ export async function codeKitRequest(
 		return responseData;
 	} catch (error) {
 		throw new NodeApiError(this.getNode(), error);
+		
 	}
 }
 

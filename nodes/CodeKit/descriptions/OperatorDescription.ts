@@ -38,6 +38,12 @@ export const operatorOperations: INodeProperties[] = [
 				action: 'Get logo from URL',
 			},
 			{
+				name: 'HTML Parser',
+				value: 'htmlparser',
+				description: 'Extract Single or Multiple HTML of a Website',
+				action: 'Extract html elements',
+			}, 
+			{
 				name: 'Parse URL Query',
 				value: 'parseurlquery',
 				description: 'Parse the query of an URL',
@@ -451,5 +457,97 @@ export const operatorFields = [
 		},
 		default: 'my-thumbnail',
 		description: 'Important: If you want to keep the filetype. Add the extension to the filename.',
+	},
+	// htmlParser
+	{
+		displayName: 'Url',
+		name: 'url',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['htmlparser'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'The URL of the Website to extract the HTML Content',
+	},
+	{
+		displayName: 'Html',
+		name: 'html',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['htmlparser'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'Instead of passing a URL, an html string can be directly passed',
+	},
+	{
+		displayName: 'All',
+		name: 'all',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['htmlparser'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'Default: false. Set to true to return all elements which satisfy the query. Otherwise returns only first element',
+	},
+	{
+		displayName: 'Selector',
+		name: 'selector',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['htmlparser'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'CSS selector string (overwrites tagSelector, classSelector and idSelector)',
+	},
+	{
+		displayName: 'Tag Selector',
+		name: 'tagSelector',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['htmlparser'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'Tag of the elements which have to be extracted e.g. p or div',
+	},
+	{
+		displayName: 'Class Selector',
+		name: 'classSelector',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['htmlparser'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'Class of the elements which have to be extracted',
+	},
+	{
+		displayName: 'ID Selector',
+		name: 'idSelector',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['htmlparser'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'ID of the element to be extracted',
 	},
 ] as INodeProperties[];

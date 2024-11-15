@@ -68,6 +68,18 @@ export const aiOperations: INodeProperties[] = [
 				action: 'Generate image',
 			},
 			{
+				name: 'Generate Javascript Code',
+				value: 'generateJavascriptCode',
+				description: 'Generate javascript code based on provided prompt',
+				action: 'Generate javascript code',
+			},
+			{
+				name: 'Generate Python Code',
+				value: 'generatePythonCode',
+				description: 'Generate python code based on provided prompt',
+				action: 'Generate python code',
+			},
+			{
 				name: 'Language Detection',
 				value: 'languageDetection',
 				action: 'Language detection',
@@ -114,6 +126,8 @@ export const aiOperations: INodeProperties[] = [
 				description: 'Translate text',
 				action: 'Translation',
 			},
+	
+	
 		],
 		default: 'entityDetection',
 	},
@@ -310,6 +324,20 @@ export const aiFields: INodeProperties[] = [
 		description: 'The prompt to generate',
 	},
 	{
+		displayName: 'Prompt',
+		name: 'prompt',
+		type: 'string',
+		required: true,
+		displayOptions: {
+			show: {
+				operation: ['generateJavascriptCode', 'generatePythonCode'],
+				resource: ['ai'],
+			},
+		},
+		default: '',
+		description: 'The prompt to generate the Code',
+	},
+	{
 		displayName: 'Number of Results',
 		name: 'n',
 		type: 'number',
@@ -338,4 +366,5 @@ export const aiFields: INodeProperties[] = [
 		description:
 			'The resolution of the image, only works for "256x256", "512x512", and "1024x1024"',
 	},
+	
 ];

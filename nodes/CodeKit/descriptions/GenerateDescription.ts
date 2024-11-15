@@ -31,6 +31,12 @@ export const generateOperations: INodeProperties[] = [
 				action: 'Decode a json web token',
 			},
 			{
+				name: 'Encode JSON Web Token',
+				value: 'jsonwebtoken-encode',
+				description: 'Encode a JSON Web Token',
+				action: 'Encode a json web token',
+			},
+			{
 				name: 'HTML Scraping',
 				value: 'html-scrape',
 				description: 'Scrape HTML from a URL',
@@ -464,6 +470,7 @@ export const generateFields: INodeProperties[] = [
 		},
 		default: '',
 	},
+	// generate/jsonwebtoken/decode
 	{
 		displayName: 'Token',
 		name: 'token',
@@ -531,6 +538,7 @@ export const generateFields: INodeProperties[] = [
 		},
 		default: '',
 	},
+	// generate/jsonwebtoken/encode
 
 	{
 		displayName: 'Amount',
@@ -662,7 +670,6 @@ export const generateFields: INodeProperties[] = [
 		},
 		default: false,
 	},
-
 	{
 		displayName: 'Keyword',
 		name: 'keyword',

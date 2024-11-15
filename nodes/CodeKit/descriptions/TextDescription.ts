@@ -30,6 +30,12 @@ export const textOperations: INodeProperties[] = [
 				description: 'Extract data from a string',
 				action: 'Extractor',
 			},
+			{
+				name: 'Regex',
+				value: 'regex',
+				description: 'Evaluate text against a regex',
+				action: 'Regex',
+			},
 		],
 		default: 'comparestring',
 	},
@@ -199,5 +205,32 @@ export const textFields: INodeProperties[] = [
 			},
 		},
 		default: false,
+	},
+	// regex
+	{
+		displayName: 'Text',
+		name: 'text',
+		type: 'string',
+		description: 'The text to be evaluated',
+		displayOptions: {
+			show: {
+				operation: ['extractor'],
+				resource: ['text'],
+			},
+		},
+		default: '',
+	},
+	{
+		displayName: 'Expression',
+		name: 'expression',
+		type: 'string',
+		description: 'The regular expression to evaluate against the text',
+		displayOptions: {
+			show: {
+				operation: ['extractor'],
+				resource: ['text'],
+			},
+		},
+		default: '',
 	},
 ];
