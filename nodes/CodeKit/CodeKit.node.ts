@@ -700,7 +700,7 @@ export class CodeKit implements INodeType {
 							body.buffer = this.getNodeParameter('buffer', i) as string;
 							body.fileName = this.getNodeParameter('fileName', i) as string;
 							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as string;
-							
+
 							if (pageOperation === 'rotate') {
 								body.rotate = this.getNodeParameter('rotate', i) as string;
 								body.pages = this.getNodeParameter('pages', i) as string;

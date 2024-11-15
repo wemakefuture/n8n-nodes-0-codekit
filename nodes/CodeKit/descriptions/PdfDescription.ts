@@ -64,7 +64,7 @@ export const pdfOperations: INodeProperties[] = [
 				name: 'Markdown to Pdf',
 				value: 'markdownstringtopdf',
 				description: 'Convert Markdown to PDF',
-				action: 'Markdown to pdf',	
+				action: 'Markdown to pdf',
 			},
 			{
 				name: 'Metadata',
@@ -266,7 +266,7 @@ export const pdfFields: INodeProperties[] = [
 		description: 'Buffer of the PDF',
 		displayOptions: {
 			show: {
-				operation: ['docx-to-pdf','encrypt', 'decrypt', 'watermark', 'draw', 'pages', 'metadata'],
+				operation: ['docx-to-pdf', 'encrypt', 'decrypt', 'watermark', 'draw', 'pages', 'metadata'],
 				resource: ['pdf'],
 			},
 		},

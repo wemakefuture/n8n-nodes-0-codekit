@@ -33,7 +33,7 @@ export async function codeKitRequest(
 		return responseData;
 	} catch (error) {
 		throw new NodeApiError(this.getNode(), error);
-		
+
 	}
 }
 
@@ -53,35 +53,35 @@ export async function codeKitRequestLoadOptions(
 	}
 
 	let options: IHttpRequestOptions = {
-			headers: {},
-			method,
-			body,
-			qs,
-			url: uri || `https://v2.1saas.co/${resource}`,
-			json: true,
+		headers: {},
+		method,
+		body,
+		qs,
+		url: uri || `https://v2.1saas.co/${resource}`,
+		json: true,
 	};
 	options = Object.assign({}, options, option);
 	options.headers!['auth'] = `${credentials.apiKey}`;
 
 	try {
-			const responseData = await this.helpers.httpRequest(options);
-			return responseData;
+		const responseData = await this.helpers.httpRequest(options);
+		return responseData;
 	} catch (error) {
-			throw new NodeApiError(this.getNode(), error);
+		throw new NodeApiError(this.getNode(), error);
 	}
 }
 
-export function mapArrayOfObjectsToStringArray(objectsArr : IDataObject[]){
-			if(!objectsArr){
-					return [];
-		 }
-				const resultArr : string[] = [];
+export function mapArrayOfObjectsToStringArray(objectsArr: IDataObject[]) {
+	if (!objectsArr) {
+		return [];
+	}
+	const resultArr: string[] = [];
 
-			 objectsArr.forEach(el => {
-				resultArr.push(el.name as string);
-			 });
+	objectsArr.forEach(el => {
+		resultArr.push(el.name as string);
+	});
 
-			 return resultArr;
+	return resultArr;
 }
 
 
@@ -95,7 +95,7 @@ export interface InputItem {
 
 export interface OutputObject {
 	variables: {
-			[key: string]: string;
+		[key: string]: string;
 	};
 }
 
@@ -108,9 +108,9 @@ export interface IRowKeyResponseItem {
 export function transformArrayToObject(inputArray: InputItem[]): OutputObject {
 	const initialAccumulator: OutputObject = { variables: {} };
 	const output: OutputObject = inputArray.reduce((acc, current) => {
-			const stringValue: string = typeof current.value === 'string' ? current.value : JSON.stringify(current.value);
-			acc.variables[current.property] = stringValue;
-			return acc;
+		const stringValue: string = typeof current.value === 'string' ? current.value : JSON.stringify(current.value);
+		acc.variables[current.property] = stringValue;
+		return acc;
 	}, initialAccumulator);
 	return output;
 }
