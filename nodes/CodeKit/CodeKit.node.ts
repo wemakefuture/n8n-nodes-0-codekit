@@ -719,7 +719,7 @@ export class CodeKit implements INodeType {
 								body.width = this.getNodeParameter('width', i) as string;
 								body.height = this.getNodeParameter('height', i) as string;
 								const pageIndices = this.getNodeParameter('pages', i) as number[];
-								body.pages = pageIndices
+								body.pages = pageIndices;
 							}
 						}
 						if (operation === 'draw') {
@@ -749,7 +749,6 @@ export class CodeKit implements INodeType {
 								body.color = this.getNodeParameter('color', i) as string;
 								body.font = this.getNodeParameter('font', i) as string;
 							}
-							console.log(body)
 
 						}
 						if (operation === 'watermark') {
@@ -782,7 +781,6 @@ export class CodeKit implements INodeType {
 								body.color = this.getNodeParameter('color', i) as string;
 								body.font = this.getNodeParameter('font', i) as string;
 							}
-							console.log(body)
 						}
 						if (operation === 'metadata') {
 							const metadataOperation = this.getNodeParameter('metadataop', i) as string;
@@ -801,7 +799,7 @@ export class CodeKit implements INodeType {
 								body.subject = this.getNodeParameter('subject', i) as string;
 								body.keywords = this.getNodeParameter('keywords', i) as string;
 							}
-							console.log(body)
+							
 						}
 						if (operation === 'encrypt') {
 							body.url = this.getNodeParameter('url', i) as string;
