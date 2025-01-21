@@ -20,6 +20,13 @@ export const operatorOperations: INodeProperties[] = [
 				action: 'Advanced switch',
 			},
 			{
+				name: 'Check Rate Limit',
+				value: 'trafficlight',
+				description:
+					'This module allows to create a rate limit for incoming request in order to manage traffic',
+				action: 'Check rate limit',
+			},
+			{
 				name: 'Detect Gender',
 				value: 'gender',
 				description: 'Detect possible gender by providing a name',
@@ -42,7 +49,7 @@ export const operatorOperations: INodeProperties[] = [
 				value: 'htmlparser',
 				description: 'Extract Single or Multiple HTML of a Website',
 				action: 'Extract html elements',
-			}, 
+			},
 			{
 				name: 'Parse URL Query',
 				value: 'parseurlquery',
@@ -496,7 +503,8 @@ export const operatorFields = [
 			},
 		},
 		default: '',
-		description: 'Default: false. Set to true to return all elements which satisfy the query. Otherwise returns only first element',
+		description:
+			'Default: false. Set to true to return all elements which satisfy the query. Otherwise returns only first element',
 	},
 	{
 		displayName: 'Selector',
@@ -549,5 +557,34 @@ export const operatorFields = [
 		},
 		default: '',
 		description: 'ID of the element to be extracted',
+	},
+	// opeartor/trafficlight
+	{
+		displayName: 'Name',
+		name: 'name',
+		type: 'string',
+		displayOptions: {
+			show: {
+				operation: ['trafficlight'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'The name of the specific Rate Limit Route',
+		required: true
+	},
+	{
+		displayName: 'Interval',
+		name: 'interval',
+		type: 'number',
+		displayOptions: {
+			show: {
+				operation: ['trafficlight'],
+				resource: ['operator'],
+			},
+		},
+		default: '',
+		description: 'The minimum time in seconds that must pass after one request was allowed',
+		required: true
 	},
 ] as INodeProperties[];

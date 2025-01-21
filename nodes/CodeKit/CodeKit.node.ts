@@ -283,6 +283,16 @@ export class CodeKit implements INodeType {
 						) {
 							body.prompt = this.getNodeParameter('prompt', i) as string;
 						}
+						if (
+							operation === 'advancedocr'
+						) {
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.resultType = this.getNodeParameter('resultType', i) as string;
+							body.workflow = this.getNodeParameter('workflow', i) as string;
+							body.language = this.getNodeParameter('language', i) as string;
+							body.documentType = this.getNodeParameter('documentType', i) as string;
+						}
 
 						break;
 					// Code : https://docs.1saas.co/api-documentation/code
@@ -605,6 +615,10 @@ export class CodeKit implements INodeType {
 							body.tagSelector = this.getNodeParameter('tagSelector', i) as string;
 							body.idSelector = this.getNodeParameter('idSelector', i) as string;
 							body.classSelector = this.getNodeParameter('classSelector', i) as string;
+						}
+						if (operation === 'trafficlight') {
+							body.name = this.getNodeParameter('name', i) as string;
+							body.interval = this.getNodeParameter('interval', i) as number;
 						}
 						break;
 					case 'pdf':
