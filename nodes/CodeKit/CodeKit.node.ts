@@ -293,7 +293,43 @@ export class CodeKit implements INodeType {
 							body.language = this.getNodeParameter('language', i) as string;
 							body.documentType = this.getNodeParameter('documentType', i) as string;
 						}
+						if (
+							operation === 'extract-from-text'
+						) {	
+							body.text = this.getNodeParameter('text', i) as string;
+							body.context = this.getNodeParameter('context', i) as string;
 
+							const fields = this.getNodeParameter('fieldsUI', i) as IDataObject;
+							const fieldsValues = fields.fieldsValues as IDataObject[];
+							body.fields = fieldsValues;
+						}
+						if (
+							operation === 'fuzzy-match'
+						) {	
+							body.queryString = this.getNodeParameter('queryString', i) as string;
+							body.context = this.getNodeParameter('context', i) as string;
+
+							const targetListUI = this.getNodeParameter('targetListUI', i) as IDataObject;
+							const targetList = targetListUI.targetList as IDataObject[] || [];
+
+							const targetListStrings = Array.isArray(targetList) ? targetList.map(item => item.entry) : [];
+							
+							const optionsList = this.getNodeParameter('optionsListUI', i) as IDataObject;
+							const options = optionsList.options as IDataObject;
+							
+							body.options = options
+							body.targetList = targetListStrings;
+						}
+						if (
+							operation === 'redact-pdf'
+						) {	
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.sensitiveContent = this.getNodeParameter('sensitiveContent', i) as string;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+							body.language = this.getNodeParameter('language', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+						}
 						break;
 					// Code : https://docs.1saas.co/api-documentation/code
 					case 'business':
