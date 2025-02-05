@@ -376,6 +376,20 @@ export class CodeKit implements INodeType {
 							body.phoneNumber = this.getNodeParameter('phoneNumber', i) as string;
 							body.countryCode = this.getNodeParameter('countryCode', i) as string;
 						}
+						if (operation === 'facturxEmbed') {
+							operation = 'facturx/embed';
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							body.xml = this.getNodeParameter('xml', i) as string;
+							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
+							body.fileName = this.getNodeParameter('fileName', i) as string;
+						}
+						if (operation === 'facturx/validate') {
+							operation = 'facturx/validate';
+							body.url = this.getNodeParameter('url', i) as string;
+							body.buffer = this.getNodeParameter('buffer', i) as string;
+							
+						}
 						break;
 					case 'calculate':
 						if (operation === 'bmi') {
