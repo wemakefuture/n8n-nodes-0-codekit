@@ -19,6 +19,12 @@ export const businessOperations: INodeProperties[] = [
 				action: 'Check free email',
 			},
 			{
+				name: 'Embed Factur-X/Zugferd XML Into a PDF File',
+				value: 'facturxEmbed',
+				description: 'Embedded existing XML Invoice into a PDF File',
+				action: 'Embed factur x zugferd xml into a pdf file',
+			},
+			{
 				name: 'Lookup VAT Rates',
 				value: 'lookupvatrates',
 				description: 'Lookup VAT Rates of different countries',
@@ -27,21 +33,21 @@ export const businessOperations: INodeProperties[] = [
 			{
 				name: 'Validate Phonenumber',
 				value: 'validatePhonenumber',
-				description: 'Validates the phone number if it is either a possible or existing phone number',
+				description:
+					'Validates the phone number if it is either a possible or existing phone number',
 				action: 'Validate phone number',
+			},
+			{
+				name: 'Validate Zugferd/Factur-X XML',
+				value: 'facturxValidate',
+				description:'Validated Factur-X/Zugferd XML invoice according to the specification (level EN16931)',
+				action: 'Validate factur x zugferd xml',
 			},
 			{
 				name: 'Verify a Domain',
 				value: 'verifyDomain',
 				description: 'Verifies a top-level- or subdomain',
 				action: 'Verify a domain',
-			},
-			{
-				name: 'Verify an Email and Correct It',
-				value: 'verifyEmail',
-				description:
-					'Validates an email address matching it with standards and eventually corrects it',
-				action: 'Verify an email and correct it',
 			},
 			{
 				name: 'Verify BIC',
@@ -263,6 +269,73 @@ export const businessFields = [
 		},
 		default: '',
 		placeholder: 'GB',
+	},
+	// business: facturxEmbed
+	{
+		displayName: 'Url',
+		name: 'url',
+		type: 'string',
+		description: "The URL of the PDF file that shall be embedded with the Factur-X/Zugferd XML invoice",
+		displayOptions: {
+			show: {
+				operation: ['facturxEmbed', 'facturxValidate'],
+				resource: ['business'],
+			},
+		},
+		default: '',
+	},
+	{
+		displayName: 'Buffer',
+		name: 'buffer',
+		type: 'string',
+		description: 'The Buffer of the PDF file that shall be embedded with the Factur-X/Zugferd XML invoice',
+		displayOptions: {
+			show: {
+				operation: ['facturxEmbed', , 'facturxValidate'],
+				resource: ['business'],
+			},
+		},
+		default: '',
+	},
+	{
+		displayName: 'XML',
+		name: 'xml',
+		type: 'string',
+		required: true,
+		description: 'The Factur-X/Zugferd XML invoice that shall be embedded',
+		displayOptions: {
+			show: {
+				operation: ['facturxEmbed'],
+				resource: ['business'],
+			},
+		},
+		default: '',
+	},
+	{
+		displayName: 'Get File as URL',
+		name: 'getAsUrl',
+		type: 'boolean',
+		description: 'Whether the file should be returned as URL or as binary data',
+		displayOptions: {
+			show: {
+				operation: ['facturxEmbed'],
+				resource: ['business'],
+			},
+		},
+		default: true,
+	},
+	{
+		displayName: 'File Name',
+		name: 'fileName',
+		type: 'string',
+		description: 'The name of the file',
+		displayOptions: {
+			show: {
+				operation: ['facturxEmbed'],
+				resource: ['business'],
+			},
+		},
+		default: '',
 	},
 
 ] as INodeProperties[];
