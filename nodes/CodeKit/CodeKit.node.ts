@@ -383,8 +383,11 @@ export class CodeKit implements INodeType {
 							body.xml = this.getNodeParameter('xml', i) as string;
 							body.getAsUrl = this.getNodeParameter('getAsUrl', i) as boolean;
 							body.fileName = this.getNodeParameter('fileName', i) as string;
+
+							console.log("This is the xml", body.xml)
+							console.dir(body, {depth: null})
 						}
-						if (operation === 'facturx/validate') {
+						if (operation === 'facturxValidate') {
 							operation = 'facturx/validate';
 							body.url = this.getNodeParameter('url', i) as string;
 							body.buffer = this.getNodeParameter('buffer', i) as string;
