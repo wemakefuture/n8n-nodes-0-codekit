@@ -14,12 +14,19 @@ z (Minor Changes/Bug Fixes): Small updates, bug fixes, or incremental changes to
 ## Versions:
 Current N8N Project Version: 0.3.0
 
+### V:0.3.1
+#### Add
+#### Change
+- Fixed errors regarding FacutrX issues: Was not able to recognize XML Content and validate endpoint
+#### Delete
+
 
 ### V:0.3.0
 #### Add
-- Changelog
+- Changelog for writing the changes
 - Endpoint AI Redact
 - Endpoint AI Fuzzy Match
 - Endpoint AI Extract from Text
+- Contains Business facutrX --> Validate and FacturX 
 #### Change
 #### Delete
