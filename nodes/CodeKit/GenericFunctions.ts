@@ -28,7 +28,7 @@ export async function codeKitRequest(
 	};
 	options = Object.assign({}, options, option);
 	options.headers!['auth'] = `${credentials.apiKey}`;
-	options.headers!['ipass']  = 'n8n';
+	options.headers!['platform']  = 'n8n';
 	try {
 		const responseData = await this.helpers.request(options);
 		return responseData;
@@ -63,7 +63,7 @@ export async function codeKitRequestLoadOptions(
 	};
 	options = Object.assign({}, options, option);
 	options.headers!['auth'] = `${credentials.apiKey}`;
-	options.headers!['ipass']  = 'n8n';
+	options.headers!['platform']  = 'n8n';
 
 	try {
 		const responseData = await this.helpers.httpRequest(options);
