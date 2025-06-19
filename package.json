@@ -6,9 +6,9 @@
 		"n8n-community-node-package"
 	],
 	"license": "MIT",
-	"homepage": "https://www.1saas.co/",
+	"homepage": "https://www.0codekit.com/",
 	"author": {
-		"name": "wemakefuture",
+		"name": "0CodeKit",
 		"email": "dev@wemakefuture.com"
 	},
 	"publishConfig": {
