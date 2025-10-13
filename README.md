@@ -1,6 +1,6 @@
 # ⚠️ Deprecated Package Notice
 
-> **This package (`n8n-nodes-onesaas-0codekit`) is deprecated.**
+> **This package (`n8n-nodes-0-codekit`) is deprecated.**
 > Please use the new and actively maintained version instead:
 > 
 > 👉 [https://www.npmjs.com/package/@0codekit/n8n-nodes-0codekit](https://www.npmjs.com/package/@0codekit/n8n-nodes-0codekit) 
